@@ -20,7 +20,7 @@ int main()
 
 	// if you are using class templates
 	BSTree<MechPart> treeValues;
-	HTable<MechPart> tableValues;
+	//HTable<MechPart> tableValues;
     MechPart part;
 
 	// Reads data from input file and populates tree
@@ -41,7 +41,7 @@ int main()
 			tempSS2 >> tempInt;
 			part.set_quantity(tempInt);
 			treeValues.add(part); // adds element to the tree
-			tableValues.add(part); // adds element to the table
+			//tableValues.add(part); // adds element to the table
 		}
 	}
 
@@ -50,7 +50,7 @@ int main()
 			
 	cout << "==================" << endl << "BINARY SEARCH TREE" << endl << "==================" << endl << endl;
 	t = clock(); // gets current time
-	cout << "Initial tree: " << treeValues << endl; // prints the contents of the tree.
+	//cout << "Initial tree: " << treeValues << endl; // prints the contents of the tree.
 
 	cout << endl << "Adding and removing..." << endl;
 	for (int j=0; j<100000; j++)
@@ -66,7 +66,7 @@ int main()
 			part.set_code(vectorCodes[i]); part.set_quantity(vectorQuantities[i]);
 			treeValues.add(part);
 		}
-	}
+	}/*
 	cout << endl << endl;
 	//cout << "Final tree  : " << treeValues << endl << endl; // prints the contents of the tree.
 	cout << "Time elapsed: " << (clock() - t)/1000.0 << " seconds" << endl; // prints elapsed time.
@@ -99,7 +99,7 @@ int main()
     cout << "Time elapsed: " << (clock() - t)/1000.0 << " seconds" << endl; // prints elapsed time.
 	cout << "Time per ins/del operation: " << 1000.0*(double)(clock() - t)/(double)(100000*21) << " milliseconds." << endl << endl;
 	cout << "There are " << tableValues.calculateParts() << " types of parts and " << tableValues.calculateInventory() << " parts in total." << endl;
-	cout << "There are " << tableValues.calculateLessThan(10) << " types of parts with less than 10 in inventory." << endl << endl;
+	cout << "There are " << tableValues.calculateLessThan(10) << " types of parts with less than 10 in inventory." << endl << endl;*/
 	cout << "The program has finished." << endl;
 	return 0;
 }
