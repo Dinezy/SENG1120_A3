@@ -30,7 +30,7 @@ public:
 
     void setParent(BTNode<value_type>* parent_);
 
-    value_type getParent();
+    BTNode<value_type>* getParent();
 
 private:
     value_type data; // the data the Node holds

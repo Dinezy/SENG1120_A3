@@ -25,9 +25,9 @@ public:
 
     void remove(value_type data, BTNode<value_type>* node);
 
-    /*<<;
+    BTNode<value_type>* search(value_type data, BTNode<value_type>* node);
 
-    remove();
+    /*<<;
 
     search();
 
@@ -41,5 +41,7 @@ private:
     BTNode<value_type>* root;
 
 };
+//template <typename value_type>
+//std::ostream &operator<<(std::ostream &out, value_type &Tree);
 #include "BSTree.hpp"
 #endif //SENG1120_A3_BSTREE_H

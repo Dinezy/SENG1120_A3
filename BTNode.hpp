@@ -50,6 +50,6 @@ void BTNode<value_type>::setParent(BTNode<value_type>* parent_){
 }
 
 template <typename value_type>
-value_type BTNode<value_type>::getParent(){
+BTNode<value_type>* BTNode<value_type>::getParent(){
     return parent;
 }
