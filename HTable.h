@@ -5,34 +5,41 @@
 #ifndef SENG1120_A3_HTABLE_H
 #define SENG1120_A3_HTABLE_H
 
+#include <cstddef>
+#include <iostream>
+#include <ostream>
+template <typename value_type>
+
 class HTable {
 public:
-    //void add();
 
-   /* operator<<();
+    HTable();
+    ~HTable();
 
-    void remove();
+    int hashfun(const value_type& value);
 
-    void search();
+    void add(value_type data);
 
-    void calculateParts();
+    void remove(value_type data);
 
-    void calculateLessThan();
+    std::string HTGetCode(int i);
 
-    void calculateInventory();*/
+    int HTGetQuantity(int i);
 
-    int hashfun();
+    int calculateParts();
+
+    int calculateInventory();
+
+    int calculateLessThan(int pass);
+
 
 private:
-   /* T[x]
-    data;
+
+    value_type table[5000];         //TODO: work this out properly
     int size;
 
-    Node* head;
-    Node* tail;
-    Node* current;*/
-
-
 };
+template <typename value_type>
+std::ostream &operator<<(std::ostream &out, HTable<value_type>& hashtable);
 #include "HTable.hpp"
 #endif //SENG1120_A3_HTABLE_H

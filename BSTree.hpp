@@ -179,14 +179,21 @@ BTNode <value_type> *BSTree<value_type>::find(BTNode <value_type> *node) {
 
 template <typename value_type>
 BTNode <value_type> *BSTree<value_type>::search(value_type data, BTNode <value_type> *node) {
-
+    std::cout << "Hello There" << std::endl;
+    //TODO: broken :(
     if (data.get_code().compare(node->getData().get_code()) > 0){
+    //if(data > node->getData()){
+        std::cout << "D" << std::endl;
         node = node->getRightChild();
         search(data, node);
     }else if (data.get_code().compare(node->getData().get_code()) < 0){
+   // else if(data < node->getData()){
+        std::cout << "E" << std::endl;
         node = node->getLeftChild();
         search(data, node);
     }else if (data.get_code().compare(node->getData().get_code()) == 0){
+    //else if(data == node->getData()){
+        std::cout << "ahhhh" << std::endl;
         return node;
     }
 }
