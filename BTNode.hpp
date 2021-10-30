@@ -35,7 +35,7 @@ BTNode<value_type>* BTNode<value_type>::getLeftChild(){
     return left;                //returns prev
 }
 template <typename value_type>
-void BTNode<value_type>::setData(value_type& data_){
+void BTNode<value_type>::setData(value_type data_){
     data = data_;           //moves data into data node
 }
 

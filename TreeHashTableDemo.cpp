@@ -40,7 +40,7 @@ int main()
 			tempSS2 << token;  
 			tempSS2 >> tempInt;
 			part.set_quantity(tempInt);
-			//treeValues.add(part); // adds element to the tree
+			treeValues.add(part); // adds element to the tree
 			tableValues.add(part); // adds element to the table
 		}
 	}
@@ -50,7 +50,7 @@ int main()
 			
 	cout << "==================" << endl << "BINARY SEARCH TREE" << endl << "==================" << endl << endl;
 	t = clock(); // gets current time
-	//cout << "Initial tree: " << treeValues << endl; // prints the contents of the tree.
+	cout << "Initial tree: " << treeValues << endl; // prints the contents of the tree.
 
 	cout << endl << "Adding and removing..." << endl;
 	for (int j=0; j<100000; j++)
@@ -58,20 +58,20 @@ int main()
 		for (int i=0; i<11; i++)
 		{ // removes the 11 elements in the list. The first one is not present.
 			part.set_code(vectorCodes[i]); part.set_quantity(vectorQuantities[i]);
-			//treeValues.remove(part);
+			treeValues.remove(part);
 		}
 
 		for (int i=1; i<11; i++)
 		{ // adds all elements removed back into the data structure.
 			part.set_code(vectorCodes[i]); part.set_quantity(vectorQuantities[i]);
-			//treeValues.add(part);
+			treeValues.add(part);
 		}
 	}
 	cout << endl << endl;
-	//cout << "Final tree  : " << treeValues << endl << endl; // prints the contents of the tree.
+	cout << "Final tree  : " << treeValues << endl << endl; // prints the contents of the tree.
 	cout << "Time elapsed: " << (clock() - t)/1000.0 << " seconds" << endl; // prints elapsed time.
 	cout << "Time per ins/del operation: " << 1000.0*(double)(clock() - t)/(double)(100000*21) << " milliseconds." << endl;
-	//cout << "There are " << treeValues.calculateParts() << " types of parts and " << treeValues.calculateInventory() << " parts in total." << endl;
+	cout << "There are " << treeValues.calculateParts() << " types of parts and " << treeValues.calculateInventory() << " parts in total." << endl;
 	//cout << "There are " << treeValues.calculateLessThan(10) << " types of parts with less than 10 in inventory." << endl << endl;
 
 	cout << "==================" << endl << "HASH TABLE" << endl << "==================" << endl << endl;

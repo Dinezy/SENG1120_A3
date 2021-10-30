@@ -8,7 +8,7 @@
 
 template<typename value_type>
 BSTree<value_type>::BSTree() {
-    BTNode <value_type> *root = NULL;
+  root = NULL;
 }
 
 template<typename value_type>
@@ -35,34 +35,42 @@ void BSTree<value_type>::add(value_type data) {
 
 template<typename value_type>
 void BSTree<value_type>::add(value_type data, BTNode <value_type> *node) {
-    BTNode <value_type> *temp_Node = new BTNode<value_type>;
-    temp_Node->setData(data);
-    temp_Node->setRightChild(NULL);         //initialise left and right Nodes to be linked
-    temp_Node->setLeftChild(NULL);
-    node = temp_Node;
-    if (data.get_quantity() < node->getData().get_quantity()) {
-        if (node->getLeftChild() == NULL) {
-            node->setLeftChild(temp_Node);
-            temp_Node->setParent(node);
-        }
+
+    //node = temp_Node;
 
 
-        add(data, node->getLeftChild());
-    } else if (data.get_quantity() > node->getData().get_quantity()) {
-        if (node->getRightChild() == NULL) {
-            node->setRightChild(temp_Node);
-            temp_Node->setParent(node);
+        if (data < node->getData()) {
+            if (node->getLeftChild() == NULL) {
+                BTNode <value_type> *temp_Node = new BTNode<value_type>;
+                temp_Node->setData(data);
+                temp_Node->setRightChild(NULL);         //initialise left and right Nodes to be linked
+                temp_Node->setLeftChild(NULL);
+
+                node->setLeftChild(temp_Node);
+                temp_Node->setParent(node);
+            } else {
+                add(data, node->getLeftChild());
+            }
+        } else if (data > node->getData()) {
+            if (node->getRightChild() == NULL) {
+                BTNode <value_type> *temp_Node = new BTNode<value_type>;
+                temp_Node->setData(data);
+                temp_Node->setRightChild(NULL);         //initialise left and right Nodes to be linked
+                temp_Node->setLeftChild(NULL);
+
+                node->setRightChild(temp_Node);
+                temp_Node->setParent(node);
+            } else {
+                add(data, node->getRightChild());
+            }
         }
-        add(data, node->getRightChild());
-    }
-    temp_Node = NULL;
+    //temp_Node = NULL;
 }
 
 template<typename value_type>
 void BSTree<value_type>::remove(value_type data) {
     BTNode <value_type> *temp_Node = new BTNode<value_type>;     //create a new temporary root node
     //std::cout << "I have entered" << std::endl;
-
 
     if (root == NULL) {
         return;
@@ -76,102 +84,71 @@ void BSTree<value_type>::remove(value_type data) {
 template<typename value_type>
 void BSTree<value_type>::remove(value_type data, BTNode <value_type> *node) {
     BTNode <value_type> *temp_Node = new BTNode<value_type>;
-    temp_Node = node;
 
-    std::cout << "hello" << std::endl;
+    //temp_Node = search(data);
+
     if (node == root) {
-
-        if (node->getRightChild() != NULL && node->getLeftChild() == NULL) {          //only has a right child
-            root = node->getRightChild();
-            root->setParent(NULL);
-
-            node = NULL;
-        } else if (node->getRightChild() == NULL && node->getLeftChild() != NULL) {     //only has a left child
-            root = node->getLeftChild();
-            root->setParent(NULL);
-
-            node = NULL;
-
-        } else if (node->getRightChild() != NULL && node->getLeftChild() != NULL) {
-            temp_Node = node->getRightChild();
-            temp_Node = find(temp_Node);
-
-            node->getLeftChild()->setParent(temp_Node);
-            node->getRightChild()->setParent(temp_Node);
-
-            temp_Node->setRightChild(node->getRightChild());
-            temp_Node->setLeftChild(node->getLeftChild());
-
-            node = temp_Node;
-            root = node;
-
-            temp_Node = NULL;
-        } else if (node->getRightChild() == NULL && node->getLeftChild() == NULL) {
+        if (node->getRightChild() != NULL && node->getLeftChild() != NULL) {       //no children
             root = NULL;
+        } else if (node->getRightChild() == NULL && node->getLeftChild() != NULL) {  //only has right
+            root = root->getRightChild();
+        } else if (node->getRightChild() != NULL && node->getLeftChild() == NULL) {  //only has left
+            root = root->getLeftChild();
         }
-
-    } else if (node->getLeftChild() != NULL && node->getRightChild() == NULL) {                //only has left child
-
-        temp_Node = node->getLeftChild();
-        temp_Node->setParent(node->getParent());
-
-        if(node->getParent()->getLeftChild() == node){
-            node->getParent()->setLeftChild(temp_Node);
-        }else{
-            node->getParent()->setRightChild(temp_Node);
-        }
-
-        node = temp_Node;
-        temp_Node = NULL;
-
-    } else if (node->getLeftChild() == NULL && node->getRightChild() != NULL) {                //only has right child
-
-        temp_Node = node->getRightChild();
-        temp_Node->setParent(node->getParent());
-
-        if(node->getParent()->getLeftChild() == node){
-            node->getParent()->setLeftChild(temp_Node);
-        }else{
-            node->getParent()->setRightChild(temp_Node);
-        }
-
-        node = temp_Node;
-        temp_Node = NULL;
-
-    } else if (node->getLeftChild() != NULL && node->getRightChild() != NULL) {                //has 2 children
-
-        if(node->getParent()->getLeftChild() == node){
-            temp_Node = find(node->getRightChild());
-            node->getParent()->setLeftChild(temp_Node);
-            temp_Node->setParent(node->getParent());
-
-        }else{
-            temp_Node = find(node);
-            node->getParent()->setRightChild(temp_Node);
-            temp_Node->setParent(node->getParent());
-        }
-
-        node = temp_Node;
-        temp_Node = NULL;
-
-
-    } else if (node->getLeftChild() == NULL && node->getRightChild() == NULL) {                //has no children
-        if(node->getParent()->getLeftChild() == node){
+    } else if (node->getRightChild() == NULL && node->getLeftChild() == NULL) {           //has no children
+        if (node->getParent()->getLeftChild() == node) {
             node->getParent()->setLeftChild(NULL);
-        }else{
+            node = NULL;
+        } else {
             node->getParent()->setRightChild(NULL);
+            node = NULL;
         }
+    } else if (node->getRightChild() != NULL && node->getLeftChild() == NULL) {    //only has right child
+        if (node->getParent()->getLeftChild() == node) {
+            node->getParent()->setLeftChild(node->getRightChild());
+            node->getRightChild()->setParent(node->getParent());
+            node = NULL;
+        } else {
+            node->getParent()->setRightChild(node->getRightChild());
+            node->getRightChild()->setParent(node->getParent());
+            node = NULL;
+        }
+    }else if(node->getRightChild() == NULL && node->getLeftChild() != NULL) {   //only has left child
+        if (node->getParent()->getLeftChild() == node) {
+        node->getParent()->setLeftChild(node->getLeftChild());
+        node->getLeftChild()->setParent(node->getParent());
         node = NULL;
+        } else {
+        node->getParent()->setRightChild(node->getLeftChild());
+        node->getLeftChild()->setParent(node->getParent());
+        node = NULL;
+        }
+    }else if(node->getRightChild() != NULL && node->getLeftChild() != NULL){    //has 2 children
+        temp_Node = find(node->getRightChild());
+        if(node->getParent()->getLeftChild() == node){
+            node->getParent()->setLeftChild(temp_Node);
+            temp_Node->setParent(node->getParent());
+            temp_Node->setLeftChild(node->getLeftChild());
+            temp_Node->setRightChild(node->getRightChild());
+            node = NULL;
+
+        }else{
+            node->getParent()->setRightChild(temp_Node);
+            temp_Node->setParent(node->getParent());
+            temp_Node->setLeftChild(node->getLeftChild());
+            temp_Node->setRightChild(node->getRightChild());
+            node = NULL;
+        }
     }
     temp_Node = NULL;
 }
+
 
 template<typename value_type>
 BTNode <value_type> *BSTree<value_type>::find(BTNode <value_type> *node) {
     if (node->getLeftChild() != NULL) {
         node = node->getLeftChild();
         find(node);
-        return node;
     } else {
         return node;
     }
@@ -179,28 +156,83 @@ BTNode <value_type> *BSTree<value_type>::find(BTNode <value_type> *node) {
 
 template <typename value_type>
 BTNode <value_type> *BSTree<value_type>::search(value_type data, BTNode <value_type> *node) {
-    std::cout << "Hello There" << std::endl;
-    //TODO: broken :(
-    if (data.get_code().compare(node->getData().get_code()) > 0){
-    //if(data > node->getData()){
-        std::cout << "D" << std::endl;
+    if (data > node->getData()){
+       if(node->getRightChild() != NULL){
         node = node->getRightChild();
         search(data, node);
-    }else if (data.get_code().compare(node->getData().get_code()) < 0){
-   // else if(data < node->getData()){
-        std::cout << "E" << std::endl;
-        node = node->getLeftChild();
-        search(data, node);
-    }else if (data.get_code().compare(node->getData().get_code()) == 0){
-    //else if(data == node->getData()){
-        std::cout << "ahhhh" << std::endl;
-        return node;
+       }else{
+           return node;
+       }
+    }else if (data < node->getData()){
+        if(node->getLeftChild() != NULL) {
+            node = node->getLeftChild();
+            search(data, node);
+        }else{
+            return node;
+        }
+    }else if (data == node->getData()){
+      return node;
     }
 }
 
+template <typename value_type>
+std::ostream& BSTree<value_type>::print(std::ostream &out){
+    BTNode<value_type>* temp_Node = root;
+    print(out, temp_Node);
+}
 
-//template<typename value_type>
-/*std::ostream &operator<<(std::ostream &out, value_type &Tree) {
+template <typename value_type>
+std::ostream& BSTree<value_type>::print(std::ostream& out, BTNode<value_type>* node){
+    if(node != NULL){
+        print(out, node->getLeftChild());
+        out << node->getData() << "";
+        print(out, node->getRightChild());
+    }
+}
 
-return out;
-}*/
+template <typename value_type>
+int BSTree<value_type>::calculateParts(){
+    int total = 0;
+    total = calculate_Parts(root);
+    return total;
+}
+
+template <typename value_type>
+int BSTree<value_type>::calculate_Parts(BTNode<value_type> *node){
+        int total = 0;
+        if (node != NULL) {
+            total += calculate_Parts(node->getLeftChild());
+            total++;
+            total += calculate_Parts(node->getRightChild());
+        }
+    return total;
+}
+
+template <typename value_type>
+int BSTree<value_type>::calculateInventory(){
+    int total = 0;
+    total = calculate_Inventory(root);
+    return total;
+}
+
+template <typename value_type>
+int BSTree<value_type>::calculate_Inventory(BTNode<value_type>* node){
+    int total = 0;
+    if (node != NULL) {
+        total += calculate_Inventory(node->getLeftChild());
+        total += node->getData().get_quantity();
+        total += calculate_Inventory(node->getRightChild());
+    }
+    return total;
+}
+
+template <typename value_type>
+std::ostream &operator<<(std::ostream &out, BSTree<value_type>& Tree) {
+
+    Tree.print(out);
+
+    return out;                                                                                 //returns object to be printed to screen
+}
+
+
+

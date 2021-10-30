@@ -24,7 +24,7 @@ public:
     BTNode<value_type>* getLeftChild();
 
 
-    void setData(value_type& data_);
+    void setData(value_type data_);
 
     value_type getData();
 
