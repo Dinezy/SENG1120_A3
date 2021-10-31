@@ -14,55 +14,77 @@ template <typename value_type>
 class BSTree {
 public:
 
+    //precondition:
+    //postcondition:
     BSTree();
+
+    //precondition:
+    //postcondition:
     ~BSTree();
 
+    //precondition:
+    //postcondition:
     void add(value_type data);
 
+    //precondition:
+    //postcondition:
     void add(value_type data, BTNode<value_type>* node);
 
-    //bool QLessThan(value_type data, BTNode <value_type> *node);
-
-    //bool QGreaterThan(value_type data, BTNode <value_type> *node);
-
+    //precondition:
+    //postcondition:
     BTNode<value_type>* find(BTNode<value_type>* node);
 
-    void remove(value_type data);
+    //precondition:
+    //postcondition:
+    void remove(const value_type data);
 
-    void remove(value_type data, BTNode<value_type>* node);
+    //precondition:
+    //postcondition:
+    BTNode<value_type>* remove(const value_type& data, BTNode<value_type>* node);
 
+    //precondition:
+    //postcondition:
     BTNode<value_type>* search(value_type data, BTNode<value_type>* node);
 
+    //precondition:
+    //postcondition:
     std::ostream& print(std::ostream& out, BTNode<value_type>* node);
 
+    //precondition:
+    //postcondition:
     std::ostream& print(std::ostream &out);
 
+    //precondition:
+    //postcondition:
     int calculateParts();
 
+    //precondition:
+    //postcondition:
     int calculate_Parts(BTNode<value_type> *node);
 
+    //precondition:
+    //postcondition:
     int calculateInventory();
 
+    //precondition:
+    //postcondition:
     int calculate_Inventory(BTNode<value_type>* node);
 
+    //precondition:
+    //postcondition:
     int calculateLessThan(int pass);
 
+    //precondition:
+    //postcondition:
     int calculate_LessThan(BTNode<value_type> *node, int pass);
-
-    /*<<;
-
-    search();
-
-    calculateParts();
-
-    calculateLessThan();
-
-    calculateInventory();*/
 
 private:
     BTNode<value_type>* root;
 
 };
+
+//precondition:
+//postcondition:
 template <typename value_type>
 std::ostream &operator<<(std::ostream &out, BSTree<value_type>& Tree);
 

@@ -58,7 +58,7 @@ int main()
 		for (int i=0; i<11; i++)
 		{ // removes the 11 elements in the list. The first one is not present.
 			part.set_code(vectorCodes[i]); part.set_quantity(vectorQuantities[i]);
-			//treeValues.remove(part);
+			treeValues.remove(part);
 		}
 
 		for (int i=1; i<11; i++)

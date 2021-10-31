@@ -18,21 +18,21 @@ BTNode<value_type>::~BTNode(){
 
 template <typename value_type>
 void BTNode<value_type>::setRightChild(BTNode<value_type>* right_){
-    right = right_;               //moves requested next to next Node
+    right = right_;               //moves requested right to the right node
 }
 
 
 template <typename value_type>
 BTNode<value_type>* BTNode<value_type>::getRightChild(){
-    return right;                //returns next
+    return right;                //returns right
 }
 template <typename value_type>
 void BTNode<value_type>::setLeftChild(BTNode<value_type>* left_){
-    left = left_;               //moves requested prev to prev node
+    left = left_;               //moves requested left to the left node
 }
 template <typename value_type>
 BTNode<value_type>* BTNode<value_type>::getLeftChild(){
-    return left;                //returns prev
+    return left;                //returns left
 }
 template <typename value_type>
 void BTNode<value_type>::setData(value_type data_){
@@ -46,10 +46,10 @@ value_type BTNode<value_type>::getData(){
 
 template <typename value_type>
 void BTNode<value_type>::setParent(BTNode<value_type>* parent_){
-    parent = parent_;
+    parent = parent_;           //moves requested parent to parent node
 }
 
 template <typename value_type>
 BTNode<value_type>* BTNode<value_type>::getParent(){
-    return parent;
+    return parent;              //returns parent
 }
