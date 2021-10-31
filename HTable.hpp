@@ -16,7 +16,7 @@ HTable<value_type>::HTable(){
 
 template <typename value_type>
 HTable<value_type>::~HTable(){
-
+    //as its all stored on the stack, the array will go out of scope and be auto removed by the compiler
 }
 
 template <typename value_type>

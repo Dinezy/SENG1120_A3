@@ -69,61 +69,59 @@ void BSTree<value_type>::add(const value_type data, BTNode <value_type> *node) {
 
 template<typename value_type>
 void BSTree<value_type>::remove(const value_type data){
-    root = remove(data, root);
+    root = remove(data, root);  //pass root to remove fn
 }
 
 template<typename value_type>
 BTNode<value_type>* BSTree<value_type>::remove(const value_type& data, BTNode<value_type>* node)
 {
-    BTNode<value_type>* temp;
-    if (node == NULL){
+    BTNode<value_type>* temp;                           //create temp var
+    if (node == NULL){                                  //if node == null return
         return NULL;
     }
 
-    if (data < node->getData()){
-        node->setLeftChild(remove(data, node->getLeftChild()));
+    if (data < node->getData()){                                            //if data is less than nodes data
+        node->setLeftChild(remove(data, node->getLeftChild()));             //remove nodes left child (recurse on it till found)
 
-        if (node->getLeftChild()){
-            node->getLeftChild()->setParent(node);
+        if (node->getLeftChild()){                                          //if left child is not null
+            node->getLeftChild()->setParent(node);                          //set the nodes left childs parent to node
         }
-    }else if (data > node->getData()){
-        node->setRightChild(remove(data, node->getRightChild()));
-        if (node->getRightChild()){
-            node->getRightChild()->setParent(node);
+    }else if (data > node->getData()){                                      //if data is > nodes data
+        node->setRightChild(remove(data, node->getRightChild()));           //remove nodes left child (recurse on it till found)
+        if (node->getRightChild()){                                         //if nodes right child is not null
+            node->getRightChild()->setParent(node);                         //set nodes right childs parent to node
         }
     }else{
-        // for 2 child
-        if (node->getLeftChild() && node->getRightChild()){
-            temp = find(node->getRightChild());
-            node->setData(temp->getData());
-            node->setRightChild(remove(node->getData(), node->getRightChild()));
+        // for 2 children
+        if (node->getLeftChild() && node->getRightChild()){                             //if the node has 2 children
+            temp = find(node->getRightChild());                                         //temp = the min value in respect the node
+            node->setData(temp->getData());                                             //set the data to temp nodes data
+            node->setRightChild(remove(node->getData(), node->getRightChild()));        //remove the right child / recurse on it
         }else{// not 2 children
-            temp = node;
-            // check left
-            if (node->getLeftChild() == NULL){
-                node = node->getRightChild();
-            } else if (node->getRightChild() == NULL){
-                node = node->getLeftChild();
+            temp = node;                                                                //temp = node
+            // check left child
+            if (node->getLeftChild() == NULL){                                          //if the left child is == nULL
+                node = node->getRightChild();                                           //node equals the right child
+            } else if (node->getRightChild() == NULL){                                  //if its equal to null
+                node = node->getLeftChild();                                            //node equals the left child
             }
-            delete temp;
-           // size--;
+            delete temp;                                                                //delete temp
         }
     }
 
     // Check node
-    if (!node) {
-        return node;
+    if (!node) {                                                                        //if node equals null
+        return node;                                                                    //return
     }
-
-    return node;
+    return node;                                                                            //return
 }
 
 template<typename value_type>
 BTNode <value_type> *BSTree<value_type>::find(BTNode <value_type> *node) {
-    if (node->getLeftChild() == NULL) {
-        return node;
+    if (node->getLeftChild() == NULL) {                     //if the left child equal null
+        return node;                                        //return
     } else {
-        return find(node->getLeftChild());
+        return find(node->getLeftChild());                  //recurse on the left child
     }
 }
 
@@ -147,7 +145,7 @@ BTNode <value_type> *BSTree<value_type>::search(const value_type data, BTNode <v
 template<typename value_type>
 std::ostream &BSTree<value_type>::print(std::ostream &out) {
     BTNode <value_type> *temp_Node = root;
-    print(out, temp_Node);       //pass the root node to print
+    return print(out, temp_Node);       //pass the root node to print
 }
 
 template<typename value_type>
@@ -155,7 +153,7 @@ std::ostream &BSTree<value_type>::print(std::ostream &out, BTNode <value_type> *
     if (node != NULL) {                                   //if the node is not equal to NULL
         print(out, node->getLeftChild());               //go left and recurse
         out << node->getData() << "";                   //print the data
-        print(out, node->getRightChild());              //go right and recurse
+        return print(out, node->getRightChild());              //go right and recurse
     }
 }
 

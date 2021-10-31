@@ -22,41 +22,40 @@ public:
     int hashfun(const value_type& value);
 
     //precondition: the data passed is valid of value_type
-    //postcondition:
+    //postcondition: adds the data to the position that hashfun generates
     void add(const value_type data);
 
-    //precondition:
-    //postcondition:
+    //precondition: the data passed to function is valid
+    //postcondition: the data is removed from the array
     void remove(const value_type data);
 
-    //precondition:
-    //postcondition:
-    const std::string HTGetCode(int i) const;
+    //precondition: that the int i is within the array size
+    //postcondition: returns the code at index i
+    const std::string HTGetCode(const int i) const;
 
-    //precondition:
-    //postcondition:
-    const int HTGetQuantity(int i) const;
+    //precondition: that the int i is within the array size
+    //postcondition: returns the quantity at index i
+    const int HTGetQuantity(const int i) const;
 
-    //precondition:
-    //postcondition:
+    //precondition: none
+    //postcondition: increments everytime a position in the array has data, returns total
     const int calculateParts() const;
 
-    //precondition:
-    //postcondition:
+    //precondition: none
+    //postcondition: returns the total amount of inventory in the array
     const int calculateInventory() const;
 
-    //precondition:
-    //postcondition:
-    const int calculateLessThan(int pass) const;
+    //precondition: none
+    //postcondition: increments a counter whenever quantity is < pass. returns total
+    const int calculateLessThan(const int pass) const;
 
 
 private:
-
     value_type table[5000];
 };
 
-//precondition:
-//postcondition:
+//precondition: passed HTable must exist / be initialised
+//postcondition: prints HTable to console
 template <typename value_type>
 std::ostream &operator<<(std::ostream &out, HTable<value_type>& hashtable);
 #include "HTable.hpp"
