@@ -58,7 +58,7 @@ int main()
 		for (int i=0; i<11; i++)
 		{ // removes the 11 elements in the list. The first one is not present.
 			part.set_code(vectorCodes[i]); part.set_quantity(vectorQuantities[i]);
-			treeValues.remove(part);
+			//treeValues.remove(part);
 		}
 
 		for (int i=1; i<11; i++)
@@ -72,7 +72,7 @@ int main()
 	cout << "Time elapsed: " << (clock() - t)/1000.0 << " seconds" << endl; // prints elapsed time.
 	cout << "Time per ins/del operation: " << 1000.0*(double)(clock() - t)/(double)(100000*21) << " milliseconds." << endl;
 	cout << "There are " << treeValues.calculateParts() << " types of parts and " << treeValues.calculateInventory() << " parts in total." << endl;
-	//cout << "There are " << treeValues.calculateLessThan(10) << " types of parts with less than 10 in inventory." << endl << endl;
+	cout << "There are " << treeValues.calculateLessThan(10) << " types of parts with less than 10 in inventory." << endl << endl;
 
 	cout << "==================" << endl << "HASH TABLE" << endl << "==================" << endl << endl;
 	t = clock(); // gets current time

@@ -76,7 +76,7 @@ void BSTree<value_type>::remove(value_type data) {
         return;
     } else {
         temp_Node = search(data, root);
-        remove(data, temp_Node);
+        remove(data, temp_Node);    //location of node where the data is stored
     }
     temp_Node = NULL;
 }
@@ -84,8 +84,6 @@ void BSTree<value_type>::remove(value_type data) {
 template<typename value_type>
 void BSTree<value_type>::remove(value_type data, BTNode <value_type> *node) {
     BTNode <value_type> *temp_Node = new BTNode<value_type>;
-
-    //temp_Node = search(data);
 
     if (node == root) {
         if (node->getRightChild() != NULL && node->getLeftChild() != NULL) {       //no children
@@ -223,6 +221,27 @@ int BSTree<value_type>::calculate_Inventory(BTNode<value_type>* node){
         total += node->getData().get_quantity();
         total += calculate_Inventory(node->getRightChild());
     }
+    return total;
+}
+
+template <typename value_type>
+int BSTree<value_type>::calculateLessThan(int pass){
+    int total = 0;
+    total = calculate_LessThan(root, pass);
+    return total;
+}
+
+template <typename value_type>
+int BSTree<value_type>::calculate_LessThan(BTNode<value_type> *node, int pass){
+    int total = 0;
+    if (node != NULL) {
+      if(node->getData().get_quantity() < pass) {
+          total++;
+      }
+      total += calculate_LessThan(node->getLeftChild(), pass);
+      total += calculate_LessThan(node->getRightChild(), pass);
+
+      }
     return total;
 }
 

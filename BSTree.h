@@ -45,6 +45,10 @@ public:
 
     int calculate_Inventory(BTNode<value_type>* node);
 
+    int calculateLessThan(int pass);
+
+    int calculate_LessThan(BTNode<value_type> *node, int pass);
+
     /*<<;
 
     search();
