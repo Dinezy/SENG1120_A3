@@ -13,7 +13,9 @@ BSTree<value_type>::BSTree() {
 
 template<typename value_type>
 BSTree<value_type>::~BSTree() {
-
+    while(root != NULL){
+        remove(root->getData());
+    }
 }
 
 template<typename value_type>
@@ -209,15 +211,6 @@ BTNode<value_type>* BSTree<value_type>::remove(const value_type& data, BTNode<va
 
     return node;
 }
-
-
-
-
-
-
-
-
-
 
 template<typename value_type>
 BTNode <value_type> *BSTree<value_type>::find(BTNode <value_type> *node) {
