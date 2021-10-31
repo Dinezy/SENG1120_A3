@@ -19,7 +19,7 @@ BSTree<value_type>::~BSTree() {
 }
 
 template<typename value_type>
-void BSTree<value_type>::add(value_type data) {
+void BSTree<value_type>::add(const value_type data) {
     //edge case when list is empty
     if (root == NULL) {
         BTNode <value_type> *temp_Root = new BTNode<value_type>;     //create a new temporary root node
@@ -37,7 +37,7 @@ void BSTree<value_type>::add(value_type data) {
 }
 
 template<typename value_type>
-void BSTree<value_type>::add(value_type data, BTNode <value_type> *node) {
+void BSTree<value_type>::add(const value_type data, BTNode <value_type> *node) {
 
     if (data < node->getData()) {                                       //if data is less that the nodes data
         if (node->getLeftChild() == NULL) {                             //if the left child is null
@@ -66,100 +66,6 @@ void BSTree<value_type>::add(value_type data, BTNode <value_type> *node) {
     }
     //temp_Node = NULL;
 }
-
-/*
-template<typename value_type>
-void BSTree<value_type>::remove(value_type data) {
-    BTNode <value_type> *temp_Node = new BTNode<value_type>;     //create a new temporary root node
-    if (root == NULL) {                                          //if the root is equal to null
-        return;
-    } else {
-        temp_Node = search(data, root);                          //find the location the data in the tree
-        if(temp_Node != NULL) {
-            remove(data, temp_Node);                                 //location of node where the data is stored
-        }
-    }
-    //temp_Node = NULL;
-}
-*/
-/*template<typename value_type>
-void BSTree<value_type>::remove(value_type data, BTNode <value_type> *node) {
-    BTNode <value_type> *temp_Node = new BTNode<value_type>;
-
-    if (node == root) {           //if the found node is the root
-        std::cout << "ahhhhhhhhhhh" << std::endl;
-        if (node->getLeftChild() == NULL && node->getRightChild() == NULL) {  //if it has no children
-            delete node;
-            node = NULL;
-            root = NULL;
-        } else if (node->getLeftChild() == NULL && node->getRightChild() != NULL) {    //only has right child
-            temp_Node = node->getRightChild();
-            delete root;
-            root = temp_Node;
-            root->setParent(NULL);
-        } else if (node->getLeftChild() != NULL && node->getRightChild() == NULL) {    //only has left child
-            temp_Node = node->getLeftChild();
-            delete root;
-            root = temp_Node;
-            root->setParent(NULL);
-        }
-    } else if (node->getLeftChild() == NULL && node->getRightChild() == NULL) {    //has no child
-        std::cout << "yeeeeeeeeeeeeee" << std::endl;
-        if (node->getParent()->getLeftChild() == node) {      //the node it a left child
-            node->getParent()->setLeftChild(NULL);
-            delete node;
-            node = NULL;
-        } else {                                          //the node is a right child
-            node->getParent()->setRightChild(NULL);
-            delete node;
-            node = NULL;
-        }
-    } else if (node->getLeftChild() == NULL && node->getRightChild() != NULL) {    //only the right child exists
-        std::cout << "bruuuuuuuuuuuuuuuuuuuuuu" << std::endl;
-        if (node->getParent()->getLeftChild() == node) {                      //if its a left child
-            node->getParent()->setLeftChild(node->getRightChild());         //set the parents left child to nodes right child
-            node->getRightChild()->setParent(node->getParent());            //set the nodes right childs parent to nodes parent
-            delete node;
-            node = NULL;                                                    //removes node
-        } else {                                                              // if its a right child
-            node->getParent()->setRightChild(node->getRightChild());        //get the nodes parent and set its right child to nodes right child
-            node->getRightChild()->setParent(node->getParent());            //get nodes right child and set its parent to nodes parent
-            delete node;
-            node = NULL;                                                    //removes node
-        }
-    } else if (node->getLeftChild() != NULL && node->getRightChild() == NULL) {     //only the left child exist
-        std::cout << "minecraft" << std::endl;
-        if (node->getParent()->getLeftChild() == node) {                          //the node is the left child of the parent
-            node->getParent()->setLeftChild(node->getLeftChild());              //get the nodes parent and set its left child to nodes left child
-            node->getLeftChild()->setParent(node->getParent());                 //get the nodes left child and set its parent to nodes parent
-            delete node;
-            node = NULL;                                                        //removes node
-        } else {                                                                  //if node it a right child
-            node->getParent()->setRightChild(node->getLeftChild());             //get nodes parent and set its right child to nodes left child
-            node->getLeftChild()->setParent(node->getParent());                 //get nodes left child and set its parent to nodes parent
-            delete node;
-            node = NULL;                                                        //removes node
-        }
-    } else if (node->getLeftChild() != NULL && node->getRightChild() != NULL) {    //it has 2 children
-        std::cout << "fuck you too" << std::endl;
-        temp_Node = find(node->getRightChild());                            //goes right, then as far left as possible
-        if(temp_Node->getParent()->getLeftChild() == temp_Node){            //if node to replace is a left child
-            temp_Node->getParent()->setLeftChild(NULL);                     //set its parents left child to null
-            node->setData(temp_Node->getData());                            //move its data to node
-            delete temp_Node;                                               //delete temp node
-            temp_Node = NULL;                                               //set it to null
-        }else{
-            temp_Node->getParent()->setRightChild(NULL);                    //set the temps parents right child to null
-            node->setData(temp_Node->getData());                            //move data to node
-            delete temp_Node;                                               //delete temp
-            temp_Node = NULL;                                               //set it to null
-        }
-    }
-
-
-
-    //temp_Node = NULL;
-}*/
 
 template<typename value_type>
 void BSTree<value_type>::remove(const value_type data){
@@ -222,7 +128,7 @@ BTNode <value_type> *BSTree<value_type>::find(BTNode <value_type> *node) {
 }
 
 template<typename value_type>
-BTNode <value_type> *BSTree<value_type>::search(value_type data, BTNode <value_type> *node) {
+BTNode <value_type> *BSTree<value_type>::search(const value_type data, BTNode <value_type> *node) {
     if (data > node->getData()) {                            //if data is greater than the node
         if (node->getRightChild() != NULL) {                   // and the right child is not NULL
             return search(data, node->getRightChild());                    //go right again and recurse
@@ -254,7 +160,7 @@ std::ostream &BSTree<value_type>::print(std::ostream &out, BTNode <value_type> *
 }
 
 template<typename value_type>
-int BSTree<value_type>::calculateParts() {
+const int BSTree<value_type>::calculateParts() {
     int total = 0;                          //initialise total
     total += calculate_Parts(root);          //pass the root into the recurse func
     return total;
@@ -270,7 +176,7 @@ int BSTree<value_type>::calculate_Parts(BTNode <value_type> *node) {
 }
 
 template<typename value_type>
-int BSTree<value_type>::calculateInventory() {
+const int BSTree<value_type>::calculateInventory() {
     int total = 0;                                  //initialise total
     total = calculate_Inventory(root);              //pass root node for recursion
     return total;                                   //return total
@@ -290,15 +196,14 @@ int BSTree<value_type>::calculate_Inventory(BTNode <value_type> *node) {
 }
 
 template<typename value_type>
-int BSTree<value_type>::calculateLessThan(int pass) {
+const int BSTree<value_type>::calculateLessThan(const int pass) {
     int total = 0;                                      //initialise total
-    total = calculate_LessThan(root,
-                               pass);             //total = the recursion at the root node, passing the requested integer
+    total = calculate_LessThan(root, pass);             //total = the recursion at the root node, passing the requested integer
     return total;                                       //return total
 }
 
 template<typename value_type>
-int BSTree<value_type>::calculate_LessThan(BTNode <value_type> *node, int pass) {
+int BSTree<value_type>::calculate_LessThan(BTNode <value_type> *node,const int pass) {
     int total = 0;                                                      //initialise total
     if (node != NULL) {                                                 //if node is not equal NULL
         if (node->getData().get_quantity() < pass) {                       //if nodes data is < the passed int

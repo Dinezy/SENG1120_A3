@@ -23,7 +23,7 @@ void BTNode<value_type>::setRightChild(BTNode<value_type>* right_){
 
 
 template <typename value_type>
-BTNode<value_type>* BTNode<value_type>::getRightChild(){
+BTNode<value_type>* BTNode<value_type>::getRightChild() const{
     return right;                //returns right
 }
 template <typename value_type>
@@ -31,7 +31,7 @@ void BTNode<value_type>::setLeftChild(BTNode<value_type>* left_){
     left = left_;               //moves requested left to the left node
 }
 template <typename value_type>
-BTNode<value_type>* BTNode<value_type>::getLeftChild(){
+BTNode<value_type>* BTNode<value_type>::getLeftChild() const{
     return left;                //returns left
 }
 template <typename value_type>
@@ -40,7 +40,7 @@ void BTNode<value_type>::setData(value_type data_){
 }
 
 template <typename value_type>
-value_type BTNode<value_type>::getData(){
+const value_type BTNode<value_type>::getData() const{
     return data;                //returns data
 }
 
@@ -50,6 +50,6 @@ void BTNode<value_type>::setParent(BTNode<value_type>* parent_){
 }
 
 template <typename value_type>
-BTNode<value_type>* BTNode<value_type>::getParent(){
+BTNode<value_type>* BTNode<value_type>::getParent() const{
     return parent;              //returns parent
 }

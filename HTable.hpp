@@ -33,28 +33,28 @@ int HTable<value_type>::hashfun(const value_type& value) {
 }
 
 template <typename value_type>
-void HTable<value_type>::add(value_type data){
+void HTable<value_type>::add(const value_type data){
         table[hashfun(data)] = data;                            //writes data to the position returned
 }
 
 template <typename value_type>
-void HTable<value_type>::remove(value_type data){
+void HTable<value_type>::remove(const value_type data){
     table[hashfun(data)].set_code("");                          //sets the position back to the instantiated values
     table[hashfun(data)].set_quantity(0);
 }
 
 template <typename value_type>
-std::string HTable<value_type>::HTGetCode(int i){
+const std::string HTable<value_type>::HTGetCode(const int i) const{
     return table[i].get_code();                                 //returns the code at index i
 }
 
 template <typename value_type>
-int HTable<value_type>::HTGetQuantity(int i){
+const int HTable<value_type>::HTGetQuantity(const int i) const{
     return table[i].get_quantity();                         //returns the quantity at index i
 }
 
 template <typename value_type>
-int HTable<value_type>::calculateParts(){
+const int HTable<value_type>::calculateParts() const{
     int total = 0;                                              //instantiate total at 0
     for(int i = 0; i < 5000; i++) {                             //loop for size of array
         if (table[i].get_code() != "") {                        //if its not equal to ""
@@ -65,7 +65,7 @@ int HTable<value_type>::calculateParts(){
 }
 
 template <typename value_type>
-int HTable<value_type>::calculateInventory(){
+const int HTable<value_type>::calculateInventory() const{
     int total = 0;                                      //instantiate total
     for(int i = 0; i < 5000; i++){                      //loop for size array
         total += table[i].get_quantity();               //total += the quantity at the index i
@@ -74,7 +74,7 @@ int HTable<value_type>::calculateInventory(){
 }
 
 template <typename value_type>
-int HTable<value_type>::calculateLessThan(int pass){
+const int HTable<value_type>::calculateLessThan(const int pass) const{
     int total = 0;                                                              //instantiate total at 0
     for(int i = 0; i < 5000; i++) {                                             //loop for size of array
         if (table[i].get_quantity() < pass && table[i].get_code() != "") {      //if data at quantity is < pass and is not 0

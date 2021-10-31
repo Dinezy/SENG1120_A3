@@ -2,8 +2,8 @@
 // Created by TobyD on 16/10/2021.
 //
 
-#ifndef SENG1120_A3_HTABLE_H
-#define SENG1120_A3_HTABLE_H
+#ifndef HTable_Header
+#define HTable_Header
 
 #include <cstddef>
 #include <iostream>
@@ -13,33 +13,51 @@ template <typename value_type>
 class HTable {
 public:
 
-    HTable();
-    ~HTable();
+    HTable(); //constructor
 
+    ~HTable(); //deconstructor
+
+    //precondition: the value must be of type value type
+    //postcondition: returns position in HTable for data / value
     int hashfun(const value_type& value);
 
-    void add(value_type data);
+    //precondition: the data passed is valid of value_type
+    //postcondition:
+    void add(const value_type data);
 
-    void remove(value_type data);
+    //precondition:
+    //postcondition:
+    void remove(const value_type data);
 
-    std::string HTGetCode(int i);
+    //precondition:
+    //postcondition:
+    const std::string HTGetCode(int i) const;
 
-    int HTGetQuantity(int i);
+    //precondition:
+    //postcondition:
+    const int HTGetQuantity(int i) const;
 
-    int calculateParts();
+    //precondition:
+    //postcondition:
+    const int calculateParts() const;
 
-    int calculateInventory();
+    //precondition:
+    //postcondition:
+    const int calculateInventory() const;
 
-    int calculateLessThan(int pass);
+    //precondition:
+    //postcondition:
+    const int calculateLessThan(int pass) const;
 
 
 private:
 
-    value_type table[5000];         //TODO: work this out properly
-    int size;
-
+    value_type table[5000];
 };
+
+//precondition:
+//postcondition:
 template <typename value_type>
 std::ostream &operator<<(std::ostream &out, HTable<value_type>& hashtable);
 #include "HTable.hpp"
-#endif //SENG1120_A3_HTABLE_H
+#endif //HTable_Header

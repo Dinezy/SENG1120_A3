@@ -2,8 +2,8 @@
 // Created by TobyD on 21/10/2021.
 //
 
-#ifndef SENG1120_A3_BSNODE_H
-#define SENG1120_A3_BSNODE_H
+#ifndef BTNode_Header
+#define BTNode_Header
 #include <cstddef>
 template <typename value_type>
 
@@ -11,45 +11,26 @@ class BTNode
 {
 public:
 
-    //precondition:
-    //postcondition:
+
     BTNode(); // constructor
 
-    //precondition:
-    //postcondition:
     ~BTNode(); // destructor
 
-    //precondition:
-    //postcondition:
     void setRightChild(BTNode<value_type>* next_);
 
-    //precondition:
-    //postcondition:
-    BTNode<value_type>* getRightChild();
+    BTNode<value_type>* getRightChild() const;
 
-    //precondition:
-    //postcondition:
     void setLeftChild(BTNode<value_type>* prev_);
 
-    //precondition:
-    //postcondition:
-    BTNode<value_type>* getLeftChild();
+    BTNode<value_type>* getLeftChild() const;
 
-    //precondition:
-    //postcondition:
     void setData(value_type data_);
 
-    //precondition:
-    //postcondition:
-    value_type getData();
+    const value_type getData() const;
 
-    //precondition:
-    //postcondition:
     void setParent(BTNode<value_type>* parent_);
 
-    //precondition:
-    //postcondition:
-    BTNode<value_type>* getParent();
+    BTNode<value_type>* getParent() const;
 
 private:
     value_type data; // the data the Node holds
@@ -60,4 +41,4 @@ private:
 };
 
 #include "BTNode.hpp"
-#endif //SENG1120_A3_BSNODE_H
+#endif //BTNode_Header
